@@ -15,8 +15,8 @@ class DeviceSoldSerializer(serializers.Serializer):
     device_id = serializers.IntegerField()
 
     def create(self, validated_data):
-        device_sold = DeviceSold.objects.create(**validated_data)
-        device_sold.save()
+        device_sold = DeviceSold.objects.create(device_id = validated_data.get('device_id'),user_id= validated_data.get('user_id'))
+
         return device_sold
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -36,5 +36,30 @@ class UserLoginTokenSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=100)
     password = serializers.CharField(max_length=100)
 
+
+class DeviceUpdateSerializer(serializers.Serializer):
+    name = serializers.CharField()
+    model = serializers.CharField()
+    price = serializers.IntegerField()
+    description = serializers.CharField()
+    ram = serializers.CharField()
+    internal_storage = serializers.CharField()
+    battery = serializers.CharField()
+    camera = serializers.CharField()
+    processor = serializers.CharField()
+
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.model = validated_data.get('model', instance.model)
+        instance.price = validated_data.get('price', instance.price)
+        instance.description = validated_data.get('description', instance.description)
+        instance.ram = validated_data.get('ram', instance.ram)
+        instance.internal_storage = validated_data.get('internal_storage', instance.internal_storage)
+        instance.battery = validated_data.get('battery', instance.battery)
+        instance.camera = validated_data.get('camera', instance.camera)
+        instance.processor = validated_data.get('processor', instance.processor)
+        instance.save()
+        return instance
 
         
