@@ -16,6 +16,6 @@ CMD ["--bind=0.0.0.0:8000", \
     "--timeout=180", \
     "--enable-stdio-inheritance", \
     "--worker-class=gthread", \
-    "--workers=1", \
+    "--workers=1", \   
     "--threads=2", \
     "--log-level=debug"]
